@@ -1,0 +1,48 @@
+name: LAB1 quality
+on:
+  push:
+    branches: [main, develop, 'feature/**', 'fix/**']
+  pull_request:
+    branches: [main, develop]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  quality:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      MPLBACKEND: Agg
+      PYTHONHASHSEED: '42'
+      OMP_NUM_THREADS: '1'
+      OPENBLAS_NUM_THREADS: '1'
+      MKL_NUM_THREADS: '1'
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1, Node 24
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0, Node 24
+        with:
+          python-version: '3.12'
+      - run: python -m pip install -r requirements.txt
+      - run: python -m pre_commit run --all-files --show-diff-on-failure
+      - name: Create fresh verification evidence
+        id: fresh
+        run: |
+          if [ -d reports/LAB1 ]; then mv reports/LAB1 "$RUNNER_TEMP/submitted_lab1"; fi
+          mkdir -p reports/LAB1
+          echo "$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID" > reports/LAB1/ci_run_url.txt
+      - run: python -m pytest -q
+      - run: python lab1.py verify
+      - run: python negative_controls.py
+      - run: python lab1.py tamper
+      - run: python lab1.py run
+      - run: python lab1.py reproduce
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2, Node 24
+        if: ${{ always() && steps.fresh.outcome == 'success' }}
+        with:
+          name: lab1-check-evidence
+          path: |
+            reports/LAB1/
+            mlruns/
+          retention-days: 14

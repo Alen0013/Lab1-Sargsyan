@@ -1,0 +1,18 @@
+{
+  "python": "3.12.14",
+  "platform": "Linux-6.18.57-x86_64-with-glibc2.41",
+  "run_id": "1fdbf25ca48040f0b23be335942e1d9f",
+  "versions": {
+    "numpy": "2.3.5",
+    "pandas": "2.2.3",
+    "scikit-learn": "1.8.0",
+    "scipy": "1.18.1",
+    "matplotlib": "3.10.8",
+    "seaborn": "0.13.2",
+    "pydantic": "2.14.4",
+    "PyYAML": "6.0.4",
+    "mlflow-skinny": "3.1.4",
+    "joblib": "1.6.0",
+    "threadpoolctl": "3.8.0"
+  }
+}

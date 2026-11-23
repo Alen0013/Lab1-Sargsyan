@@ -1,0 +1,422 @@
+{
+  "kind": "captured_cli_output_replay_with_actual_generated_charts",
+  "browser_screen_recording": false,
+  "duration_seconds": 245,
+  "fps": 5,
+  "resolution": [
+    1920,
+    1080
+  ],
+  "timing_note": "Command output was captured live. Reading pauses are expanded in playback.",
+  "run_id": "1fdbf25ca48040f0b23be335942e1d9f",
+  "git_commit": "1ad040ece1de0d3a260cee7d40b2011539e1948e",
+  "author": "Саргсян Ален Артурович",
+  "status": "success",
+  "scenes": [
+    {
+      "title": "ЛР1 · Вариант 25 · Калибровка",
+      "note": "Саргсян Ален Артурович. Git, защита коммитов и разведочный анализ данных.",
+      "seconds": 12,
+      "run": [
+        "python",
+        "lab1.py",
+        "--help"
+      ],
+      "capture": {
+        "command": "python lab1.py --help",
+        "events": [
+          {
+            "t": 2.5004,
+            "text": "usage: lab1.py [-h] {prepare,verify,run,tamper,reproduce}"
+          },
+          {
+            "t": 2.5004,
+            "text": ""
+          },
+          {
+            "t": 2.5004,
+            "text": "ЛР1, вариант 25: проверка данных, EDA и иллюстрация калибровки."
+          },
+          {
+            "t": 2.5004,
+            "text": ""
+          },
+          {
+            "t": 2.5004,
+            "text": "positional arguments:"
+          },
+          {
+            "t": 2.5004,
+            "text": "  {prepare,verify,run,tamper,reproduce}"
+          },
+          {
+            "t": 2.5004,
+            "text": ""
+          },
+          {
+            "t": 2.5004,
+            "text": "options:"
+          },
+          {
+            "t": 2.5004,
+            "text": "  -h, --help            show this help message and exit"
+          }
+        ],
+        "duration_seconds": 2.8885,
+        "exit_code": 0
+      }
+    },
+    {
+      "title": "Проверяем целостность исходного CSV",
+      "note": "Сравниваются размер файла и закреплённый SHA-256. Манифест не заменяет эталон.",
+      "seconds": 16,
+      "run": [
+        "python",
+        "lab1.py",
+        "verify"
+      ],
+      "capture": {
+        "command": "python lab1.py verify",
+        "events": [
+          {
+            "t": 1.6437,
+            "text": "PASS: SHA-256 fed3eb72d0575ef6192293f5093c6e801b1476b577d0386bf4455504522172ed; 119913 байт"
+          }
+        ],
+        "duration_seconds": 1.9218,
+        "exit_code": 0
+      }
+    },
+    {
+      "title": "Выполняем EDA и сохраняем MLflow-прогон",
+      "note": "Команда создаёт таблицы, графики и метрики; run_id связывает расчёт с отчётом.",
+      "seconds": 24,
+      "run": [
+        "python",
+        "lab1.py",
+        "run"
+      ],
+      "capture": {
+        "command": "python lab1.py run",
+        "events": [
+          {
+            "t": 2.5739,
+            "text": "PASS: EDA; 569 строк, 30 признаков"
+          },
+          {
+            "t": 2.574,
+            "text": "Автор: Саргсян Ален Артурович; вариант 25; seed=42"
+          },
+          {
+            "t": 2.574,
+            "text": "MLflow run_id: 1fdbf25ca48040f0b23be335942e1d9f; commit: 1ad040ece1de0d3a260cee7d40b2011539e1948e"
+          },
+          {
+            "t": 2.574,
+            "text": "logreg: Brier=0.02144191; ECE=0.03077696"
+          },
+          {
+            "t": 2.574,
+            "text": "sigmoid: Brier=0.03337386; ECE=0.05416619"
+          },
+          {
+            "t": 2.574,
+            "text": "Сводки и графики: /workspace/scratch/d920b57cb1dd/lab1-focused/reports/LAB1"
+          }
+        ],
+        "duration_seconds": 2.9188,
+        "exit_code": 0
+      }
+    },
+    {
+      "title": "Исследуем доли классов",
+      "note": "569 наблюдений: 357 benign и 212 malignant. Разбиение сохраняет пропорции классов.",
+      "seconds": 16,
+      "image": "class_balance.png"
+    },
+    {
+      "title": "Сравниваем распределения признаков",
+      "note": "Масштабы mean radius и mean area различаются. Пропусков нет; выбросы не удаляем.",
+      "seconds": 16,
+      "image": "distributions.png"
+    },
+    {
+      "title": "Изучаем связи между признаками",
+      "note": "Корреляции рассчитаны pandas и показаны seaborn. Сильная связь не означает причинность.",
+      "seconds": 16,
+      "image": "correlations.png"
+    },
+    {
+      "title": "График проблемы варианта 25",
+      "note": "На этом разбиении sigmoid увеличил Brier и ECE. Результат зафиксирован без подбора seed.",
+      "seconds": 26,
+      "image": "calibration.png"
+    },
+    {
+      "title": "Негативный контроль — изменение одного байта",
+      "note": "Изменяется временная копия. Проверка обнаруживает подмену; исходный CSV сохраняется.",
+      "seconds": 22,
+      "run": [
+        "python",
+        "lab1.py",
+        "tamper"
+      ],
+      "capture": {
+        "command": "python lab1.py tamper",
+        "events": [
+          {
+            "t": 1.5108,
+            "text": "PASS: подмена обнаружена; исходный файл не изменён"
+          },
+          {
+            "t": 1.5108,
+            "text": "Изменён один байт временной копии."
+          },
+          {
+            "t": 1.5108,
+            "text": "DATA_HASH_MISMATCH: SHA-256=a41ed263fdf05b3aae069ec325727e40c92670f06322433db6a395ce566e0164; размер=119913"
+          },
+          {
+            "t": 1.5108,
+            "text": "Оригинал сохранён: True"
+          },
+          {
+            "t": 1.5108,
+            "text": ""
+          }
+        ],
+        "duration_seconds": 1.7986,
+        "exit_code": 0
+      }
+    },
+    {
+      "title": "Три ошибочных коммита действительно отклонены",
+      "note": "Стиль, искусственный секрет и файл >1 МиБ. Для каждого отказа проверяется неизменность HEAD.",
+      "seconds": 35,
+      "run": [
+        "python",
+        "negative_controls.py"
+      ],
+      "show_log": "precommit_block.log",
+      "capture": {
+        "command": "python negative_controls.py",
+        "events": [
+          {
+            "t": 0.7617,
+            "text": "Three actual commits blocked; HEAD unchanged."
+          },
+          {
+            "t": 0.7617,
+            "text": "/workspace/scratch/d920b57cb1dd/lab1-focused/reports/LAB1/precommit_block.log"
+          }
+        ],
+        "duration_seconds": 0.7669,
+        "exit_code": 0
+      },
+      "full_log": "$ git init --quiet\n\n$ git config user.name \"Lab1 negative control\"\n\n$ git config user.email lab1@example.invalid\n\n$ git config core.autocrlf false\n\n$ git add .\n\n$ git commit --quiet -m \"control baseline\"\n\n$ /workspace/scratch/d920b57cb1dd/clean-env/bin/python -m pre_commit install --install-hooks\npre-commit installed at .git/hooks/pre-commit\n\n$ git rev-parse HEAD\nd7ead20d135c0f570b7212167e4acefa5efd7069\n\n\nCONTROL: style\n$ git add -- bad_style.py\n\n$ git commit -m \"prohibited style change\"\nPython style.............................................................Failed\n- hook id: ruff-check\n- exit code: 1\n\nI001 [*] Import block is un-sorted or un-formatted\n --> bad_style.py:1:1\n  |\n1 | import os\n  | ^^^^^^^^^\n2 | x=1\n  |\nhelp: Organize imports\n\nF401 [*] `os` imported but unused\n --> bad_style.py:1:8\n  |\n1 | import os\n  |        ^^\n2 | x=1\n  |\nhelp: Remove unused import: `os`\n\nFound 2 errors.\n[*] 2 fixable with the `--fix` option.\n\nPython format............................................................Failed\n- hook id: ruff-format\n- exit code: 1\n\nWould reformat: bad_style.py\n1 file would be reformatted\n\nStaged secrets size and syntax...........................................Passed\n\n$ git rev-parse HEAD\nd7ead20d135c0f570b7212167e4acefa5efd7069\n\n{\"case\": \"style\", \"exit_code\": 1, \"head_unchanged\": true, \"expected_marker\": \"Python style\", \"marker_found\": true, \"passed\": true}\n$ git reset --quiet HEAD -- bad_style.py\n\n\nCONTROL: secret\n$ git add -- fake_secret.txt\n\n$ git commit -m \"prohibited secret change\"\nPython style.........................................(no files to check)Skipped\nPython format........................................(no files to check)Skipped\nStaged secrets size and syntax...........................................Failed\n- hook id: staged-checks\n- exit code: 1\n\nBLOCK_SECRET fake_secret.txt: credential pattern detected; value redacted\n\n\n$ git rev-parse HEAD\nd7ead20d135c0f570b7212167e4acefa5efd7069\n\n{\"case\": \"secret\", \"exit_code\": 1, \"head_unchanged\": true, \"expected_marker\": \"BLOCK_SECRET\", \"marker_found\": true, \"passed\": true}\n$ git reset --quiet HEAD -- fake_secret.txt\n\n\nCONTROL: size\n$ git add -- too_large.bin\n\n$ git commit -m \"prohibited size change\"\nPython style.........................................(no files to check)Skipped\nPython format........................................(no files to check)Skipped\nStaged secrets size and syntax...........................................Failed\n- hook id: staged-checks\n- exit code: 1\n\nBLOCK_SIZE too_large.bin: 1048577 > 1048576 bytes\n\n\n$ git rev-parse HEAD\nd7ead20d135c0f570b7212167e4acefa5efd7069\n\n{\"case\": \"size\", \"exit_code\": 1, \"head_unchanged\": true, \"expected_marker\": \"BLOCK_SIZE\", \"marker_found\": true, \"passed\": true}\n$ git reset --quiet HEAD -- too_large.bin\n\nRESULT: PASS\n"
+    },
+    {
+      "title": "Проверяем воспроизводимость EDA",
+      "note": "Два новых прогона сравнивают четыре CSV и метрики. Идентификаторы прогонов сохранены.",
+      "seconds": 26,
+      "run": [
+        "python",
+        "lab1.py",
+        "reproduce"
+      ],
+      "capture": {
+        "command": "python lab1.py reproduce",
+        "events": [
+          {
+            "t": 2.5325,
+            "text": "PASS: EDA; 569 строк, 30 признаков"
+          },
+          {
+            "t": 2.5325,
+            "text": "Автор: Саргсян Ален Артурович; вариант 25; seed=42"
+          },
+          {
+            "t": 2.5325,
+            "text": "MLflow run_id: 39a733cf557b45a298677714d0227817; commit: 1ad040ece1de0d3a260cee7d40b2011539e1948e"
+          },
+          {
+            "t": 2.5325,
+            "text": "logreg: Brier=0.02144191; ECE=0.03077696"
+          },
+          {
+            "t": 2.5325,
+            "text": "sigmoid: Brier=0.03337386; ECE=0.05416619"
+          },
+          {
+            "t": 2.5325,
+            "text": "Сводки и графики: /tmp/tmp33zdob9v/first"
+          },
+          {
+            "t": 3.2431,
+            "text": "PASS: EDA; 569 строк, 30 признаков"
+          },
+          {
+            "t": 3.2432,
+            "text": "Автор: Саргсян Ален Артурович; вариант 25; seed=42"
+          },
+          {
+            "t": 3.2432,
+            "text": "MLflow run_id: e589448fb2fe468fa84c4a47d7707fbf; commit: 1ad040ece1de0d3a260cee7d40b2011539e1948e"
+          },
+          {
+            "t": 3.2432,
+            "text": "logreg: Brier=0.02144191; ECE=0.03077696"
+          },
+          {
+            "t": 3.2432,
+            "text": "sigmoid: Brier=0.03337386; ECE=0.05416619"
+          },
+          {
+            "t": 3.2432,
+            "text": "Сводки и графики: /tmp/tmp33zdob9v/second"
+          },
+          {
+            "t": 3.2439,
+            "text": "PASS: повторяемость"
+          },
+          {
+            "t": 3.2439,
+            "text": "eda_stats.csv: PASS"
+          },
+          {
+            "t": 3.2439,
+            "text": "feature_stats.csv: PASS"
+          },
+          {
+            "t": 3.2439,
+            "text": "correlations.csv: PASS"
+          },
+          {
+            "t": 3.2439,
+            "text": "calibration_bins.csv: PASS"
+          },
+          {
+            "t": 3.2439,
+            "text": "max metric difference: 0.0"
+          },
+          {
+            "t": 3.2439,
+            "text": "MLflow: 39a733cf557b45a298677714d0227817, e589448fb2fe468fa84c4a47d7707fbf"
+          },
+          {
+            "t": 3.2439,
+            "text": ""
+          }
+        ],
+        "duration_seconds": 3.5767,
+        "exit_code": 0
+      }
+    },
+    {
+      "title": "Автоматические проверки расчётов и ограничений",
+      "note": "Проверяются хеш, манифест, конфигурация, разбиение, ECE и синтаксис файлов.",
+      "seconds": 16,
+      "run": [
+        "python",
+        "-m",
+        "pytest",
+        "-q",
+        "-o",
+        "addopts="
+      ],
+      "capture": {
+        "command": "python -m pytest -q -o addopts=",
+        "events": [
+          {
+            "t": 1.9392,
+            "text": "....................                                                     [100%]"
+          },
+          {
+            "t": 1.9393,
+            "text": "20 passed in 1.66s"
+          }
+        ],
+        "duration_seconds": 2.6776,
+        "exit_code": 0
+      }
+    },
+    {
+      "title": "Связываем результаты с исходным кодом",
+      "note": "Отчёт: reports/LAB1/lab1_report.md. Новый код находится в ветке fix/lab1-focused.",
+      "seconds": 20,
+      "run": [
+        "git",
+        "log",
+        "--oneline",
+        "--graph",
+        "-8"
+      ],
+      "capture": {
+        "command": "git log --oneline --graph -8",
+        "events": [
+          {
+            "t": 0.0037,
+            "text": "* 1ad040e fix: separate calibration plot labels"
+          },
+          {
+            "t": 0.0037,
+            "text": "* b324cf0 refactor: focus lab1 on data EDA and required Git checks"
+          },
+          {
+            "t": 0.0037,
+            "text": "*   2deba04 Merge pull request #1 from Alen0013/develop"
+          },
+          {
+            "t": 0.0037,
+            "text": "|\\"
+          },
+          {
+            "t": 0.0037,
+            "text": "| * b3cd2da fix: support Windows dataset and path validation"
+          },
+          {
+            "t": 0.0039,
+            "text": "| *   a51af0d chore: preserve destination bootstrap"
+          },
+          {
+            "t": 0.0039,
+            "text": "| |\\"
+          },
+          {
+            "t": 0.0039,
+            "text": "| |/"
+          },
+          {
+            "t": 0.0039,
+            "text": "|/|"
+          },
+          {
+            "t": 0.0041,
+            "text": "* | f6a0f2e Initial commit"
+          },
+          {
+            "t": 0.0041,
+            "text": " /"
+          },
+          {
+            "t": 0.0042,
+            "text": "* 892ac47 docs: simplify README"
+          },
+          {
+            "t": 0.0044,
+            "text": "*   6e2c770 Merge pull request #2 from Alen0013/fix/remove-handoff-files"
+          },
+          {
+            "t": 0.0044,
+            "text": "|\\"
+          }
+        ],
+        "duration_seconds": 0.0045,
+        "exit_code": 0
+      }
+    }
+  ],
+  "actual_duration_seconds": 245.0,
+  "file_name": "lab1_full_demo.mp4",
+  "sha256": "00752907244ad552a0980fb653bf905cba3fb7e1295b5b1b20d6219896f0a22f"
+}

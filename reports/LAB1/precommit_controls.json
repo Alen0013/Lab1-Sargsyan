@@ -1,0 +1,31 @@
+{
+  "recorded_at_utc": "2026-11-23T05:03:56.698844+00:00",
+  "isolated_repository": true,
+  "all_blocked": true,
+  "controls": [
+    {
+      "case": "style",
+      "exit_code": 1,
+      "head_unchanged": true,
+      "expected_marker": "Python style",
+      "marker_found": true,
+      "passed": true
+    },
+    {
+      "case": "secret",
+      "exit_code": 1,
+      "head_unchanged": true,
+      "expected_marker": "BLOCK_SECRET",
+      "marker_found": true,
+      "passed": true
+    },
+    {
+      "case": "size",
+      "exit_code": 1,
+      "head_unchanged": true,
+      "expected_marker": "BLOCK_SIZE",
+      "marker_found": true,
+      "passed": true
+    }
+  ]
+}

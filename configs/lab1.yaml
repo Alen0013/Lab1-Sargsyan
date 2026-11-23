@@ -1,0 +1,6 @@
+author: Саргсян Ален Артурович
+variant: 25
+seed: 42
+bins: 10
+test_fraction: 0.2
+calibration_fraction: 0.2

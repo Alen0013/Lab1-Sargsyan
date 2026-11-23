@@ -1,0 +1,13 @@
+{
+  "first_run_id": "39a733cf557b45a298677714d0227817",
+  "second_run_id": "e589448fb2fe468fa84c4a47d7707fbf",
+  "files_equal": {
+    "eda_stats.csv": true,
+    "feature_stats.csv": true,
+    "correlations.csv": true,
+    "calibration_bins.csv": true
+  },
+  "max_metric_difference": 0.0,
+  "passed": true,
+  "scope": "Two runs in the same environment; one BLAS thread; timestamps/PNG excluded"
+}

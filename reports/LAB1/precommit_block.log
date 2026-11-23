@@ -1,0 +1,104 @@
+$ git init --quiet
+
+$ git config user.name "Lab1 negative control"
+
+$ git config user.email lab1@example.invalid
+
+$ git config core.autocrlf false
+
+$ git add .
+
+$ git commit --quiet -m "control baseline"
+
+$ /workspace/scratch/d920b57cb1dd/clean-env/bin/python -m pre_commit install --install-hooks
+pre-commit installed at .git/hooks/pre-commit
+
+$ git rev-parse HEAD
+d7ead20d135c0f570b7212167e4acefa5efd7069
+
+
+CONTROL: style
+$ git add -- bad_style.py
+
+$ git commit -m "prohibited style change"
+Python style.............................................................Failed
+- hook id: ruff-check
+- exit code: 1
+
+I001 [*] Import block is un-sorted or un-formatted
+ --> bad_style.py:1:1
+  |
+1 | import os
+  | ^^^^^^^^^
+2 | x=1
+  |
+help: Organize imports
+
+F401 [*] `os` imported but unused
+ --> bad_style.py:1:8
+  |
+1 | import os
+  |        ^^
+2 | x=1
+  |
+help: Remove unused import: `os`
+
+Found 2 errors.
+[*] 2 fixable with the `--fix` option.
+
+Python format............................................................Failed
+- hook id: ruff-format
+- exit code: 1
+
+Would reformat: bad_style.py
+1 file would be reformatted
+
+Staged secrets size and syntax...........................................Passed
+
+$ git rev-parse HEAD
+d7ead20d135c0f570b7212167e4acefa5efd7069
+
+{"case": "style", "exit_code": 1, "head_unchanged": true, "expected_marker": "Python style", "marker_found": true, "passed": true}
+$ git reset --quiet HEAD -- bad_style.py
+
+
+CONTROL: secret
+$ git add -- fake_secret.txt
+
+$ git commit -m "prohibited secret change"
+Python style.........................................(no files to check)Skipped
+Python format........................................(no files to check)Skipped
+Staged secrets size and syntax...........................................Failed
+- hook id: staged-checks
+- exit code: 1
+
+BLOCK_SECRET fake_secret.txt: credential pattern detected; value redacted
+
+
+$ git rev-parse HEAD
+d7ead20d135c0f570b7212167e4acefa5efd7069
+
+{"case": "secret", "exit_code": 1, "head_unchanged": true, "expected_marker": "BLOCK_SECRET", "marker_found": true, "passed": true}
+$ git reset --quiet HEAD -- fake_secret.txt
+
+
+CONTROL: size
+$ git add -- too_large.bin
+
+$ git commit -m "prohibited size change"
+Python style.........................................(no files to check)Skipped
+Python format........................................(no files to check)Skipped
+Staged secrets size and syntax...........................................Failed
+- hook id: staged-checks
+- exit code: 1
+
+BLOCK_SIZE too_large.bin: 1048577 > 1048576 bytes
+
+
+$ git rev-parse HEAD
+d7ead20d135c0f570b7212167e4acefa5efd7069
+
+{"case": "size", "exit_code": 1, "head_unchanged": true, "expected_marker": "BLOCK_SIZE", "marker_found": true, "passed": true}
+$ git reset --quiet HEAD -- too_large.bin
+
+RESULT: PASS

@@ -1,0 +1,13 @@
+{
+  "source": "https://raw.githubusercontent.com/scikit-learn/scikit-learn/1.8.0/sklearn/datasets/data/breast_cancer.csv",
+  "dataset": "Breast Cancer Wisconsin Diagnostic",
+  "dataset_url": "https://doi.org/10.24432/C5DW2B",
+  "license": "CC BY 4.0",
+  "files": [
+    {
+      "path": "data/raw/breast_cancer.csv",
+      "size_bytes": 119913,
+      "sha256": "fed3eb72d0575ef6192293f5093c6e801b1476b577d0386bf4455504522172ed"
+    }
+  ]
+}
