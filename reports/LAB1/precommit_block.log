@@ -10,11 +10,11 @@ $ git add .
 
 $ git commit --quiet -m "control baseline"
 
-$ /workspace/scratch/d920b57cb1dd/clean-env/bin/python -m pre_commit install --install-hooks
-pre-commit installed at .git/hooks/pre-commit
+$ C:\Users\Morgan\Downloads\lab_1\calibration-laba1\.venv312\Scripts\python.exe -m pre_commit install --install-hooks
+pre-commit installed at .git\hooks\pre-commit
 
 $ git rev-parse HEAD
-d7ead20d135c0f570b7212167e4acefa5efd7069
+ac6ea7a05d1c339deb428506089de1d06b263cc1
 
 
 CONTROL: style
@@ -56,7 +56,7 @@ Would reformat: bad_style.py
 Staged secrets size and syntax...........................................Passed
 
 $ git rev-parse HEAD
-d7ead20d135c0f570b7212167e4acefa5efd7069
+ac6ea7a05d1c339deb428506089de1d06b263cc1
 
 {"case": "style", "exit_code": 1, "head_unchanged": true, "expected_marker": "Python style", "marker_found": true, "passed": true}
 $ git reset --quiet HEAD -- bad_style.py
@@ -76,7 +76,7 @@ BLOCK_SECRET fake_secret.txt: credential pattern detected; value redacted
 
 
 $ git rev-parse HEAD
-d7ead20d135c0f570b7212167e4acefa5efd7069
+ac6ea7a05d1c339deb428506089de1d06b263cc1
 
 {"case": "secret", "exit_code": 1, "head_unchanged": true, "expected_marker": "BLOCK_SECRET", "marker_found": true, "passed": true}
 $ git reset --quiet HEAD -- fake_secret.txt
@@ -96,7 +96,7 @@ BLOCK_SIZE too_large.bin: 1048577 > 1048576 bytes
 
 
 $ git rev-parse HEAD
-d7ead20d135c0f570b7212167e4acefa5efd7069
+ac6ea7a05d1c339deb428506089de1d06b263cc1
 
 {"case": "size", "exit_code": 1, "head_unchanged": true, "expected_marker": "BLOCK_SIZE", "marker_found": true, "passed": true}
 $ git reset --quiet HEAD -- too_large.bin
