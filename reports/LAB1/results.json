@@ -2,10 +2,10 @@
   "author": "Саргсян Ален Артурович",
   "variant": 25,
   "lab": 1,
-  "generated_at": "2026-11-23T05:03:53.763848+00:00",
-  "git_commit": "1ad040ece1de0d3a260cee7d40b2011539e1948e",
+  "generated_at": "2026-11-23T06:04:43.985380+00:00",
+  "git_commit": "3ccaa5cd3d9ca38caa528ca51bd1cb7649afebc7",
   "data_sha256": "fed3eb72d0575ef6192293f5093c6e801b1476b577d0386bf4455504522172ed",
-  "run_id": "1fdbf25ca48040f0b23be335942e1d9f",
+  "run_id": "542c2a799d6743bea4aaba30bfca5d07",
   "config": {
     "author": "Саргсян Ален Артурович",
     "variant": 25,
@@ -31,12 +31,12 @@
   },
   "metrics": {
     "logreg": {
-      "brier": 0.0214419140498855,
-      "ece": 0.03077695628756574
+      "brier": 0.021441914049885488,
+      "ece": 0.030776956287565743
     },
     "sigmoid": {
       "brier": 0.03337386421838448,
-      "ece": 0.054166190414269386
+      "ece": 0.05416619041426942
     }
   },
   "split_indices": {
