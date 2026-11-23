@@ -1,7 +1,7 @@
 {
-  "python": "3.12.14",
-  "platform": "Linux-6.18.57-x86_64-with-glibc2.41",
-  "run_id": "1fdbf25ca48040f0b23be335942e1d9f",
+  "python": "3.12.10",
+  "platform": "Windows-10-10.0.19045-SP0",
+  "run_id": "542c2a799d6743bea4aaba30bfca5d07",
   "versions": {
     "numpy": "2.3.5",
     "pandas": "2.2.3",
